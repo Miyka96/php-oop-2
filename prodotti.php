@@ -12,3 +12,23 @@ class Prodotto {
         $this->prodotto_sconto = $sconto;
     }
 }
+
+class Alimento extends Prodotto {
+    public $peso;
+    public $tipo;
+
+    function __construct(float $peso, string $tipo){
+        $this->peso = $peso;
+        $this->tipo = $tipo;
+    }
+}
+
+class Antipulci extends Prodotto {
+    public $razza_animale;
+    public $disponibilità = true;
+
+    function __construct($razza_animale , $disponibilità){
+        $this->razza_animale = $razza_animale;
+        $this->disponibilità = $disponibilità;
+    }
+}
