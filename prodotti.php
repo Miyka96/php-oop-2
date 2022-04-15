@@ -1,6 +1,6 @@
 <?php
 class Prodotto {
-    private $prodotto_id = 3;
+    private $prodotto_id;
     protected $prodotto_nome;
     public $prodotto_prezzo;
     public $prodotto_sconto;
