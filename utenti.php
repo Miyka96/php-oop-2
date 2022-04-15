@@ -16,6 +16,47 @@ class Utenti{
 }
 
 class Utenti_registrati extends Utenti {
-    public $utente_username;
-    public $utente_password;
+    private $utente_username;
+    private $utente_password;
+
+    public function __construct($utente_id, $utente_nome,$utente_cognome, $utente_indirizzo, $utente_metodo_pagamento,$utente_username, int $utente_password){
+        parent::__construct($utente_id, $utente_nome,$utente_cognome, $utente_indirizzo, $utente_metodo_pagamento);
+        try{
+            $this->setUsername($utente_username);
+            $this->setPassword($utente_password);
+        }
+        catch (exception $e){
+            "Errore" . $e->getMessage();
+        }
+    }
+
+    public function getUsername(){
+        return $this->utente_username;
+    }
+
+    public function getPassword(){
+        return $this->utente_password;
+    }
+
+    public function setUsername($utente_username){
+        if (is_string($utente_username)){
+            $this->utente_username = $utente_username;
+        }
+        else{
+            throw new \Exception("L'username non può essere un numero");
+        }
+    }
+
+    public function setPassword($utente_password){
+        if( is_numeric($utente_password)){
+            $this->utente_password = $utente_password;
+        }
+        else{
+            throw new \Exception("La password deve essere composta da numeri");
+        }
+    }
+    
 }
+
+$utente= new Utenti_registrati(12,"piero","pieri", "via pierini","carta visa", "piero_65",303030);
+var_dump($utente);
