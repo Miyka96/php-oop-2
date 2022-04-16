@@ -1,10 +1,11 @@
 <?php
+include_once __DIR__.'./carta_credito.php';
 class Utenti{
     public $utente_id;
     public $utente_nome;
     public $utente_cognome;
     public $utente_indirizzo;
-    public $utente_metodo_pagamento; 
+    public $utente_metodo_pagamento= []; 
 
     public function __construct($utente_id, $utente_nome, $utente_cognome, $utente_indirizzo, $utente_metodo_pagamento){
         $this->utente_id = $utente_id;
@@ -13,6 +14,19 @@ class Utenti{
         $this->utente_indirizzo = $utente_indirizzo;
         $this->utente_metodo_pagamento = $utente_metodo_pagamento;
     }
+
+    function aggiungiCarta($numero, $banca,  $scadenza,  $proprietario, $cvc){
+        array_push($this->utente_metodo_pagamento, new Carta_Credito($numero,$banca,$scadenza,$proprietario,$cvc) );
+    }
+
+    public function rimuoviCarta($numero) {
+        foreach($this->utente_metodo_pagamento as $key=>$carta) {
+           if($carta->numero === $numero) {
+              array_splice($this->carta, $key, 1);
+           }
+        }
+    }
+
 }
 
 class Utenti_registrati extends Utenti {
@@ -59,4 +73,8 @@ class Utenti_registrati extends Utenti {
 }
 
 $utente= new Utenti_registrati(12,"piero","pieri", "via pierini","carta visa", "piero_65",303030);
-var_dump($utente);
+// var_dump($utente);
+
+
+
+

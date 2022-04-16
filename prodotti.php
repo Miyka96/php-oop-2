@@ -16,9 +16,10 @@ class Prodotto {
 }
 
 $cuccia = new Prodotto("cuccia", 12.40,0,"immagine_cuccia");
-var_dump($cuccia);
+// var_dump($cuccia);
 $peluche= new Prodotto("peluche", 15.00 ,0,"immagine_peluche");
-var_dump($peluche);
+// var_dump($peluche);
+$pippo= new Prodotto ("Pippo",10.50,20,"immagine Pippo");
 
 class Alimento extends Prodotto {
     public $peso;
@@ -32,11 +33,11 @@ class Alimento extends Prodotto {
 }
 
 $alimento1= new Alimento ("pappa", 12.60, 20, "immagine pappa", 3.50, "croccatini anallergici");
-var_dump($alimento1);
+// var_dump($alimento1);
 
 class Antipulci extends Prodotto {
     public $razza_animale;
-    public $disponibilità = true;
+    public $disponibilità;
 
     function __construct(string $nome, float $prezzo, int $sconto, string $img ,$razza_animale , $disponibilità){
         parent::__construct($nome,$prezzo,$sconto,$img);
@@ -46,4 +47,4 @@ class Antipulci extends Prodotto {
 }
 
 $antipulci1= new Antipulci("Addio Pulci", 15.30, 15, "immagine Antipulci","Labrador","Mese: aprile");
-var_dump($antipulci1);
+// var_dump($antipulci1);

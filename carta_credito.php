@@ -11,7 +11,7 @@ Class Carta_Credito {
         try {
             $this->SetNumero($numero);
             $this->SetBanca($banca);
-            $this->scadenza = $scadenza; //Funzione per controllo data 
+            $this->scadenza = $scadenza; //Funzione per controllo data??
             $this->proprietario = $proprietario;
             $this->SetCvc($cvc);
         }
@@ -67,6 +67,6 @@ Class Carta_Credito {
 
 }
 
-$carta1= new Carta_Credito("123456789123456","Banca Uno","12 05 25","Pippo Franco","123");
-var_dump ($carta1);
+$carta1= new Carta_Credito("1234567891234567","Banca Uno","12 05 25","Pippo Franco","123");
+// var_dump ($carta1);
 
