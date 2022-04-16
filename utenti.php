@@ -1,17 +1,20 @@
 <?php
 include_once __DIR__.'./carta_credito.php';
+include_once __DIR__.'./carrello.php';
 class Utenti{
     public $utente_id;
     public $utente_nome;
     public $utente_cognome;
     public $utente_indirizzo;
     public $utente_metodo_pagamento= []; 
+    public $carrello;
 
     public function __construct($utente_id, $utente_nome, $utente_cognome, $utente_indirizzo){
         $this->utente_id = $utente_id;
         $this->utente_nome = $utente_nome;
         $this->utente_cognome = $utente_cognome;
         $this->utente_indirizzo = $utente_indirizzo;
+        $this->carrello = new Carrello;
     }
 
     function aggiungiCarta($numero, $banca,$scadenza,$proprietario,$cvc){
@@ -22,6 +25,11 @@ class Utenti{
         if (($key = array_search($numero, $this->utente_metodo_pagamento)) !== false) {
             unset($this->utente_metodo_pagamento[$key]);
         }
+    }
+
+    public function aggiungiAlCarrello($nome,$prezzo,$img){
+        $object = $this->carrello;
+        $object->aggiungiProdotto($nome,$prezzo,$img);
     }
 }
 
@@ -65,16 +73,27 @@ class Utenti_registrati extends Utenti {
             throw new \Exception("La password deve essere composta da numeri");
         }
     }
+    // OVERRIDE DELLA FUNZIONE PER APPLICARE SCONTO??? ci proviamo domani.
+    public function aggiungiAlCarrello($nome,$prezzo,$img){
+        $object = $this->carrello;
+        $object->aggiungiProdotto($nome,$prezzo,$img);
+        // $prezzo_parziale= $this->prezzo;
+        // $prezzo_scontato= ($prezzo_parziale*20) / 100;  
+    }
     
 }
 
 $utente= new Utenti_registrati(12,"piero","pieri", "via pierini","piero_65",303030);
 $utente->aggiungiCarta("1234567891234567","banca","05 25","signor signore","456");
 $utente->aggiungiCarta("1234567451234567","altrabanca","20 20","un altro signore",789);
+
 $utente->rimuoviCarta("1234567451234567");
 // CONTROLLARE FUNZIONE RIMUOVI CARTA 
 
-var_dump($utente);
+$utente->aggiungiAlCarrello("oggetto aggiunto",300,"immagine");
+$utente->aggiungiAlCarrello("Altro oggetto aggiunto", 600,"altra immagine");
+
+print_r($utente);
 
 
 

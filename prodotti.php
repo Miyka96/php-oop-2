@@ -6,11 +6,11 @@ class Prodotto {
     public $prodotto_sconto;
     public $prodotto_img;
 
-    function __construct(string $nome, float $prezzo, int $sconto, string $img) {
+    function __construct( $nome,$prezzo,$img) {
         $this->prodotto_id++; // increment?? non funziona. Ci proviamo domani mattina.
         $this->prodotto_nome = $nome;
         $this->prodotto_prezzo = $prezzo;
-        $this->prodotto_sconto = $sconto;
+        $this->prodotto_sconto = 0;
         $this->prodotto_img = $img;
     }
 }
