@@ -7,34 +7,30 @@ class Utenti{
     public $utente_indirizzo;
     public $utente_metodo_pagamento= []; 
 
-    public function __construct($utente_id, $utente_nome, $utente_cognome, $utente_indirizzo, $utente_metodo_pagamento){
+    public function __construct($utente_id, $utente_nome, $utente_cognome, $utente_indirizzo){
         $this->utente_id = $utente_id;
         $this->utente_nome = $utente_nome;
         $this->utente_cognome = $utente_cognome;
         $this->utente_indirizzo = $utente_indirizzo;
-        $this->utente_metodo_pagamento = $utente_metodo_pagamento;
     }
 
-    function aggiungiCarta($numero, $banca,  $scadenza,  $proprietario, $cvc){
+    function aggiungiCarta($numero, $banca,$scadenza,$proprietario,$cvc){
         array_push($this->utente_metodo_pagamento, new Carta_Credito($numero,$banca,$scadenza,$proprietario,$cvc) );
     }
 
     public function rimuoviCarta($numero) {
-        foreach($this->utente_metodo_pagamento as $key=>$carta) {
-           if($carta->numero === $numero) {
-              array_splice($this->carta, $key, 1);
-           }
+        if (($key = array_search($numero, $this->utente_metodo_pagamento)) !== false) {
+            unset($this->utente_metodo_pagamento[$key]);
         }
     }
-
 }
 
 class Utenti_registrati extends Utenti {
     private $utente_username;
     private $utente_password;
 
-    public function __construct($utente_id, $utente_nome,$utente_cognome, $utente_indirizzo, $utente_metodo_pagamento,$utente_username, int $utente_password){
-        parent::__construct($utente_id, $utente_nome,$utente_cognome, $utente_indirizzo, $utente_metodo_pagamento);
+    public function __construct($utente_id, $utente_nome,$utente_cognome, $utente_indirizzo,$utente_username,$utente_password){
+        parent::__construct($utente_id, $utente_nome,$utente_cognome, $utente_indirizzo);
         try{
             $this->setUsername($utente_username);
             $this->setPassword($utente_password);
@@ -72,8 +68,13 @@ class Utenti_registrati extends Utenti {
     
 }
 
-$utente= new Utenti_registrati(12,"piero","pieri", "via pierini","carta visa", "piero_65",303030);
-// var_dump($utente);
+$utente= new Utenti_registrati(12,"piero","pieri", "via pierini","piero_65",303030);
+$utente->aggiungiCarta("1234567891234567","banca","05 25","signor signore","456");
+$utente->aggiungiCarta("1234567451234567","altrabanca","20 20","un altro signore",789);
+$utente->rimuoviCarta("1234567451234567");
+// CONTROLLARE FUNZIONE RIMUOVI CARTA 
+
+var_dump($utente);
 
 
 
