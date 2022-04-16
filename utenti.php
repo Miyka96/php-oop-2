@@ -80,20 +80,10 @@ class Utenti_registrati extends Utenti {
         // $prezzo_parziale= $this->prezzo;
         // $prezzo_scontato= ($prezzo_parziale*20) / 100;  
     }
-    
 }
 
-$utente= new Utenti_registrati(12,"piero","pieri", "via pierini","piero_65",303030);
-$utente->aggiungiCarta("1234567891234567","banca","05 25","signor signore","456");
-$utente->aggiungiCarta("1234567451234567","altrabanca","20 20","un altro signore",789);
 
-$utente->rimuoviCarta("1234567451234567");
-// CONTROLLARE FUNZIONE RIMUOVI CARTA 
 
-$utente->aggiungiAlCarrello("oggetto aggiunto",300,"immagine");
-$utente->aggiungiAlCarrello("Altro oggetto aggiunto", 600,"altra immagine");
-
-print_r($utente);
 
 
 

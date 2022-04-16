@@ -11,7 +11,7 @@ Class Carta_Credito {
         try {
             $this->SetNumero($numero);
             $this->SetBanca($banca);
-            $this->scadenza = $scadenza; //Funzione per controllo data??
+            $this->SetScadenza($scadenza); //Funzione per controllo data??
             $this->proprietario = $proprietario;
             $this->SetCvc($cvc);
         }
@@ -45,10 +45,6 @@ Class Carta_Credito {
         }
     }
 
-    // function SetScadenza($scadenza){
-    //     Devo fare qualcosa per convertire la stringa in data e fare controllo sulla scadenza
-    // }
-
     function SetCvc($cvc){
         if(is_numeric($cvc)){
             $this->cvc = $cvc;
@@ -65,8 +61,23 @@ Class Carta_Credito {
         }
     }
 
+    function SetScadenza($scadenza){
+       $data= strtotime($scadenza);
+       $now = date_create('now')->format('Y-m-d H:i:s');
+       $time_now = strtotime($now); 
+       if($data > $time_now ){
+            $this->scadenza = $scadenza;
+       }
+       else{
+           throw new \Exception("La carta è scaduta");
+       }
+    //    var_dump($data);
+    //    var_dump($now);
+    //    var_dump($time_now);
+    }
+
 }
 
-$carta1= new Carta_Credito("1234567891234567","Banca Uno","12 05 25","Pippo Franco","123");
+// $carta1= new Carta_Credito("1234567891234567","Banca Uno","10 September 2024","Pippo Franco","123");
 // var_dump ($carta1);
 
